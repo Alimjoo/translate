@@ -3,10 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
     <title>Piyazon Translator</title>
-    <script src="translate.js"></script>
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/load_font.css">
+    <script src="./js/translate.js"></script>
+    <script src="./js/set_display_lang.js"></script>
   </head>
   <body>
+    <div class="profile-wrapper text-center">
+      <div id="avatar">
+        <a href="/" alt="avatar" class="mx-auto" dir="auto">
+          <img src="./favicon/favicon.svg" alt="avatar" />
+        </a>
+      </div>
+      <div class="display_lang_selector">
+        Display Language: 
+        <select name="DisLang" id="display_lang">
+          <option value="zh">中文</option>
+          <option value="ug">ئۇيغۇرچە</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </div>
+
     <div class="container">
       <h1>Translation App</h1>
       <form id="translateForm" onsubmit="translateText(event)">

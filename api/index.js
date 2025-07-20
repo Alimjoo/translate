@@ -17,12 +17,13 @@ app.use(express.static(path.join(__dirname, '../public')));
 // Route to handle translation
 app.post('/translate', async (req, res) => {
   try {
-    const { text, toLang } = req.body;
-    if (!text || !toLang) {
+    console.log(req.body);
+    const { text, fromLang, toLang } = req.body;
+    if (!text || !toLang || !fromLang) {
       return res.status(400).json({ error: 'Text and target language are required' });
     }
 
-    const result = await translate(text, null, toLang);
+    const result = await translate(text, fromLang, toLang);
     res.json({ translation: result.translation });
   } catch (err) {
     console.error(err);

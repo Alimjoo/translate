@@ -92,7 +92,7 @@ let display_lang_ug = {
 
 // Retrieving the variable
 let retrievedVariable = localStorage.getItem("display_lang");
-console.log(retrievedVariable); // Output: Hello, World!
+// console.log(retrievedVariable); // Output: Hello, World!
 
 var selected_display_lang;
 
@@ -106,7 +106,7 @@ if (retrievedVariable == "zh") {
     selected_display_lang =  display_lang_zh;
 }
 
-console.log(selected_display_lang);
+// console.log(selected_display_lang);
 
 function Change_Display_Lang(){
     

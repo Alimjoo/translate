@@ -13,6 +13,28 @@ function populateDropdown(dropdown, options) {
     li.classList.add("option");
     dropdown.querySelector("ul").appendChild(li);
   });
+  if (inputLanguageDropdown === dropdown){
+    var stored_src_lang = localStorage.getItem("stored_src_lang");
+    if (!stored_src_lang) stored_src_lang = 'en';
+    console.log(stored_src_lang);
+    const stored_src_lang_el = inputLanguageDropdown.querySelector(`li[data-value=${stored_src_lang}].option`);
+    console.log(stored_src_lang_el.textContent);
+    stored_src_lang_el.classList.add("active");
+    const selected = dropdown.querySelector(".selected");
+    selected.innerHTML = stored_src_lang_el.innerHTML;
+    selected.dataset.value = stored_src_lang_el.dataset.value;
+  }
+  if (outputLanguageDropdown === dropdown){
+    var stored_des_lang = localStorage.getItem("stored_des_lang");
+    if (!stored_des_lang) stored_src_lang = 'zh-Hans';
+    console.log(stored_des_lang);
+    const stored_des_lang_el = outputLanguageDropdown.querySelector(`li[data-value=${stored_des_lang}].option`);
+    console.log(stored_des_lang_el.textContent);
+    stored_des_lang_el.classList.add("active");
+    const selected = dropdown.querySelector(".selected");
+    selected.innerHTML = stored_des_lang_el.innerHTML;
+    selected.dataset.value = stored_des_lang_el.dataset.value;
+  }
 }
 
 populateDropdown(inputLanguageDropdown, selected_display_lang);
@@ -29,11 +51,19 @@ dropdowns.forEach((dropdown) => {
       dropdown.querySelectorAll(".option").forEach((item) => {
         item.classList.remove("active");
       });
-      console.log(item);
+      // console.log(item.dataset.value);
+      if (inputLanguageDropdown.contains(item)){
+        store_to_local("stored_src_lang", item.dataset.value);
+      }
+      if (outputLanguageDropdown.contains(item)){
+        store_to_local("stored_des_lang", item.dataset.value);
+      }
       item.classList.add("active");
       const selected = dropdown.querySelector(".selected");
       selected.innerHTML = item.innerHTML;
       selected.dataset.value = item.dataset.value;
+      // console.log(localStorage.getItem("stored_src_lang"));
+      // console.log(localStorage.getItem("stored_des_lang"));
       translate();
     });
   });
@@ -87,62 +117,64 @@ async function translate() {
     });
     const data = await response.json();
     if (data.error) {
+      outputTextElem.value = ``;
       console.log(`Error ${data.error}`);
     } else {
       outputTextElem.value = `${data.translation}`;
+      console.log(outputTextElem.value);
     }
   } catch (err) {
     console.error(err);
   }
 }
 
-inputTextElem.addEventListener("input", (e) => {
+inputTextElem.addEventListener("input", async (e) => {
   //limit input to 5000 characters
   if (inputTextElem.value.length > 5000) {
     inputTextElem.value = inputTextElem.value.slice(0, 5000);
   }
-  translate();
+  await translate();
 });
 
-const uploadDocument = document.querySelector("#upload-document"),
-  uploadTitle = document.querySelector("#upload-title");
+// const uploadDocument = document.querySelector("#upload-document"),
+//   uploadTitle = document.querySelector("#upload-title");
 
-uploadDocument.addEventListener("change", (e) => {
-  const file = e.target.files[0];
-  if (
-    file.type === "application/pdf" ||
-    file.type === "text/plain" ||
-    file.type === "application/msword" ||
-    file.type ===
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-  ) {
-    uploadTitle.innerHTML = file.name;
-    const reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = (e) => {
-      inputTextElem.value = e.target.result;
-      translate();
-    };
-  } else {
-    alert("Please upload a valid file");
-  }
-});
+// uploadDocument.addEventListener("change", (e) => {
+//   const file = e.target.files[0];
+//   if (
+//     file.type === "application/pdf" ||
+//     file.type === "text/plain" ||
+//     file.type === "application/msword" ||
+//     file.type ===
+//     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+//   ) {
+//     uploadTitle.innerHTML = file.name;
+//     const reader = new FileReader();
+//     reader.readAsText(file);
+//     reader.onload = (e) => {
+//       inputTextElem.value = e.target.result;
+//       translate();
+//     };
+//   } else {
+//     alert("Please upload a valid file");
+//   }
+// });
 
-const downloadBtn = document.querySelector("#download-btn");
+// const downloadBtn = document.querySelector("#download-btn");
 
-downloadBtn.addEventListener("click", (e) => {
-  const outputText = outputTextElem.value;
-  const outputLanguage =
-    outputLanguageDropdown.querySelector(".selected").dataset.value;
-  if (outputText) {
-    const blob = new Blob([outputText], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.download = `translated-to-${outputLanguage}.txt`;
-    a.href = url;
-    a.click();
-  }
-});
+// downloadBtn.addEventListener("click", (e) => {
+//   const outputText = outputTextElem.value;
+//   const outputLanguage =
+//     outputLanguageDropdown.querySelector(".selected").dataset.value;
+//   if (outputText) {
+//     const blob = new Blob([outputText], { type: "text/plain" });
+//     const url = URL.createObjectURL(blob);
+//     const a = document.createElement("a");
+//     a.download = `translated-to-${outputLanguage}.txt`;
+//     a.href = url;
+//     a.click();
+//   }
+// });
 
 const darkModeCheckbox = document.getElementById("dark-mode-btn");
 

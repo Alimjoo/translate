@@ -124,6 +124,7 @@ dropdowns.forEach((dropdown) => {
       selected.dataset.value = item.dataset.value;
       // console.log(localStorage.getItem("stored_src_lang"));
       // console.log(localStorage.getItem("stored_des_lang"));
+      change_input_output_ug();
       translate();
     });
   });

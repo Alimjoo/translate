@@ -362,4 +362,7 @@ body.dark {
   .swap-position ion-icon {
     transform: rotate(90deg);
   }
+  #input-text, #output-text{
+    height: 200px;
+  }
 }

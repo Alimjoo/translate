@@ -1,5 +1,7 @@
 let display_lang_zh = {
-    selec_display_name: "显示语言",
+    name: "Piyazon 翻译",
+    piyazon_name: "Piyazon 官网",
+    code: "zh",
     src_lang: {
         "en": "英语",
         "ug": "维吾尔语",
@@ -24,11 +26,17 @@ let display_lang_zh = {
         "fa": "波斯语",
         "pt-PT": "葡萄牙语",
         "th": "泰语",
-    }
+    },
+    from: "从 :",
+    to: "到 :",
+    input_place_holder: "输入文本",
+    output_place_holder: "发翻译会出现在这里"
 };
 
 let display_lang_en = {
-    selec_display_name: "Display Name",
+    name: "Piyazon Translator",
+    piyazon_name: "Piyazon Official",
+    code: "en",
     src_lang: {
         "en": "English",
         "ug": "Uyghur",
@@ -53,11 +61,17 @@ let display_lang_en = {
         "fa": "Persian",
         "pt-PT": "Portuguese",
         "th": "Thai",
-    }
+    },
+    from: "from :",
+    to: "to :",
+    input_place_holder: "Enter your text here",
+    output_place_holder: "Translated text will appear here"
 };
 
 let display_lang_ug = {
-    selec_display_name: "كۆرسىتىش تىلى",
+    name: "پىيازون تەرجىمالى",
+    piyazon_name: "پىيازون تورى",
+    code: "ug",
     src_lang: {
         "en": "ئىنگلىزچە", // English
         "ug": "ئۇيغۇرچە", // Uyghur
@@ -82,7 +96,11 @@ let display_lang_ug = {
         "fa": "پارسچە", // Persian
         "pt-PT": "پورتۇگالچە", // Portuguese
         "th": "تايلاندچە" // Thai
-    }
+    },
+    from: "دىن :",
+    to: "غا :",
+    input_place_holder: "تىكىستنى كىرگۈزۈڭ",
+    output_place_holder: "تەرجىمىسى بۇيەدە چىقىدۇ"
 };
 
 
@@ -91,32 +109,27 @@ let display_lang_ug = {
 // localStorage.setItem("display_lang", myVariable);
 
 
-function store_to_local(var_name, var_val){
-   localStorage.setItem(var_name, var_val); 
+function store_to_local(var_name, var_val) {
+    localStorage.setItem(var_name, var_val);
 }
-
-// Retrieving the variable
-let retrievedVariable = localStorage.getItem("display_lang");
-// console.log(retrievedVariable); // Output: Hello, World!
 
 var selected_display_lang;
 
-if (retrievedVariable == "zh") {
-    selected_display_lang =  display_lang_zh;
-}else if (retrievedVariable == "ug"){
-    selected_display_lang =  display_lang_ug;
-}else if (retrievedVariable == "en"){
-    selected_display_lang =  display_lang_en;
-}else{
-    selected_display_lang =  display_lang_zh;
+function get_disp_lang() {
+    // Retrieving the variable
+    let retrievedVariable = localStorage.getItem("display_lang");
+    // console.log(retrievedVariable); // Output: Hello, World!
+    if (retrievedVariable == "zh") {
+        selected_display_lang = display_lang_zh;
+    } else if (retrievedVariable == "ug") {
+        selected_display_lang = display_lang_ug;
+    } else if (retrievedVariable == "en") {
+        selected_display_lang = display_lang_en;
+    } else {
+        selected_display_lang = display_lang_ug;
+    }
 }
 
-// console.log(selected_display_lang);
-
-function Change_Display_Lang(){
-    
-}
-
-
+get_disp_lang();
 
 

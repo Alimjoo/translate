@@ -32,3 +32,37 @@ async function translateText(event) {
         console.error(err);
     }
 }
+
+
+const menuIcon = document.querySelector('.menu-icon');
+const menuContainer = document.querySelector('.menu-container');
+
+menuIcon.addEventListener('click', () => {
+    menuContainer.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!menuContainer.contains(e.target)) {
+        menuContainer.classList.remove('active');
+    }
+});
+
+function change_input_output_ug() {
+    if (inputLanguageDropdown.querySelector(".selected").dataset.value == 'ug') {
+        inputTextElem.style.direction = 'rtl';
+        inputTextElem.style.fontFamily = 'chiwer';
+    } else {
+        inputTextElem.style.direction = 'ltr';
+        inputTextElem.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
+    }
+    if (outputLanguageDropdown.querySelector(".selected").dataset.value == 'ug') {
+        outputTextElem.style.direction = 'rtl';
+        outputTextElem.style.fontFamily = 'chiwer';
+    } else {
+        outputTextElem.style.direction = 'ltr';
+        outputTextElem.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
+    }
+}
+
+

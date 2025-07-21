@@ -29,6 +29,7 @@ dropdowns.forEach((dropdown) => {
       dropdown.querySelectorAll(".option").forEach((item) => {
         item.classList.remove("active");
       });
+      console.log(item);
       item.classList.add("active");
       const selected = dropdown.querySelector(".selected");
       selected.innerHTML = item.innerHTML;

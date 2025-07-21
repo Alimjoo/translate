@@ -90,6 +90,11 @@ let display_lang_ug = {
 // let myVariable = "zh";
 // localStorage.setItem("display_lang", myVariable);
 
+
+function store_to_local(var_name, var_val){
+   localStorage.setItem(var_name, var_val); 
+}
+
 // Retrieving the variable
 let retrievedVariable = localStorage.getItem("display_lang");
 // console.log(retrievedVariable); // Output: Hello, World!

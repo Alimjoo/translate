@@ -126,7 +126,7 @@ function get_disp_lang() {
     } else if (retrievedVariable == "en") {
         selected_display_lang = display_lang_en;
     } else {
-        selected_display_lang = display_lang_ug;
+        selected_display_lang = display_lang_zh;
     }
 }
 

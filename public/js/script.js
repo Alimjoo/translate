@@ -9,7 +9,7 @@ const swapBtn = document.querySelector(".swap-position"),
   outputTextElem = document.querySelector("#output-text");
 
 function populateDropdown(dropdown, options) {
-  console.log(options["src_lang"]);
+  // console.log(options["src_lang"]);
   dropdown.querySelector("ul").innerHTML = "";
   Object.keys(options["src_lang"]).forEach((option) => {
     const li = document.createElement("li");
@@ -22,9 +22,9 @@ function populateDropdown(dropdown, options) {
   if (inputLanguageDropdown === dropdown) {
     var stored_src_lang = localStorage.getItem("stored_src_lang");
     if (!stored_src_lang) stored_src_lang = 'en';
-    console.log(stored_src_lang);
+    // console.log(stored_src_lang);
     const stored_src_lang_el = inputLanguageDropdown.querySelector(`li[data-value=${stored_src_lang}].option`);
-    console.log(stored_src_lang_el.textContent);
+    // console.log(stored_src_lang_el.textContent);
     stored_src_lang_el.classList.add("active");
     const selected = dropdown.querySelector(".selected");
     selected.innerHTML = stored_src_lang_el.innerHTML;
@@ -33,9 +33,9 @@ function populateDropdown(dropdown, options) {
   if (outputLanguageDropdown === dropdown) {
     var stored_des_lang = localStorage.getItem("stored_des_lang");
     if (!stored_des_lang) stored_des_lang = 'zh-Hans';
-    console.log(stored_des_lang);
+    // console.log(stored_des_lang);
     const stored_des_lang_el = outputLanguageDropdown.querySelector(`li[data-value=${stored_des_lang}].option`);
-    console.log(stored_des_lang_el.textContent);
+    // console.log(stored_des_lang_el.textContent);
     stored_des_lang_el.classList.add("active");
     const selected = dropdown.querySelector(".selected");
     selected.innerHTML = stored_des_lang_el.innerHTML;
@@ -55,7 +55,7 @@ const curInLang = inputLanguageDropdown.querySelector(".selected");
 const curOutLang = outputLanguageDropdown.querySelector(".selected");
 function Change_Display_Lang() {
   get_disp_lang();
-  console.log(`change to ${selected_display_lang['code']}`)
+  // console.log(`change to ${selected_display_lang['code']}`)
   fromHeading.innerHTML = selected_display_lang["from"];
   toHeading.innerHTML = selected_display_lang["to"];
   webName.innerHTML = selected_display_lang["name"];
@@ -183,7 +183,7 @@ swapBtn.addEventListener("click", (e) => {
 
 async function translate() {
   const text = inputTextElem.value;
-  console.log(text);
+  // console.log(text);
   const fromLang =
     inputLanguageDropdown.querySelector(".selected").dataset.value;
   const toLang =
@@ -203,7 +203,7 @@ async function translate() {
       console.log(`Error ${data.error}`);
     } else {
       outputTextElem.value = `${data.translation}`;
-      console.log(outputTextElem.value);
+      // console.log(outputTextElem.value);
     }
   } catch (err) {
     console.error(err);
@@ -286,9 +286,36 @@ const debouncedTranslate = debounce(async () => {
 
 const darkModeCheckbox = document.getElementById("dark-mode-btn");
 
+// darkModeCheckbox.addEventListener("change", () => {
+//   document.body.classList.toggle("dark");
+// });
+
+
+// Function to apply the theme based on stored value or default
+function applyTheme() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+    darkModeCheckbox.checked = true; // Set checkbox to checked
+  } else {
+    document.body.classList.remove("dark");
+    darkModeCheckbox.checked = false; // Set checkbox to unchecked
+  }
+}
+
+// Apply theme when page loads
+document.addEventListener("DOMContentLoaded", applyTheme);
+
+// Toggle theme on checkbox change
 darkModeCheckbox.addEventListener("change", () => {
   document.body.classList.toggle("dark");
+  const isDarkMode = darkModeCheckbox.checked;
+  localStorage.setItem("theme", isDarkMode ? "dark" : "light");
 });
+
+
+
+
 
 const inputChars = document.querySelector("#input-chars");
 

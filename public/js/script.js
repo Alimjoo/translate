@@ -64,7 +64,11 @@ function Change_Display_Lang() {
   curOutLang.innerHTML = selected_display_lang["src_lang"][curOutLang.dataset.value];
   const input_options = document.querySelectorAll('#input-language .dropdown-menu .option');
   const output_options = document.querySelectorAll('#output-language .dropdown-menu .option');
-  if (selected_display_lang["code"] == "ug") {
+  if (selected_display_lang["code"] == "ug" ||
+    selected_display_lang["code"] == "ur" ||
+    selected_display_lang["code"] == "fa" ||
+    selected_display_lang["code"] == "ar"
+  ) {
     fromHeading.style.fontFamily = "chiwer";
     toHeading.style.fontFamily = "chiwer";
     webName.style.fontFamily = "chiwer";

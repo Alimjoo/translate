@@ -110,7 +110,6 @@ dropdowns.forEach((dropdown) => {
 
   dropdown.querySelectorAll(".option").forEach((item) => {
     item.addEventListener("click", (e) => {
-      console.log("cliced");
       //remove active class from current dropdowns
       dropdown.querySelectorAll(".option").forEach((item) => {
         item.classList.remove("active");

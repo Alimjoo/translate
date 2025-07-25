@@ -60,7 +60,11 @@ function change_input_output_ug() {
         inputTextElem.style.direction = 'ltr';
         inputTextElem.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
     }
-    if (outputLanguageDropdown.querySelector(".selected").dataset.value == 'ug') {
+    if (outputLanguageDropdown.querySelector(".selected").dataset.value == 'ug' ||
+        outputLanguageDropdown.querySelector(".selected").dataset.value == "ur" ||
+        outputLanguageDropdown.querySelector(".selected").dataset.value == "fa" ||
+        outputLanguageDropdown.querySelector(".selected").dataset.value == "ar"
+) {
         outputTextElem.style.direction = 'rtl';
         outputTextElem.style.fontFamily = 'chiwer';
     } else {

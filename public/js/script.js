@@ -193,7 +193,7 @@ swapBtn.addEventListener("click", (e) => {
 async function translate() {
   const text = inputTextElem.value;
   if (text === '') return;
-  outputTextElem.value = "Translating....";
+  outputTextElem.value = "⏳";
   // console.log(text);
   const fromLang =
     inputLanguageDropdown.querySelector(".selected").dataset.value;

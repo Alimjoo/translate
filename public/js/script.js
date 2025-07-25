@@ -178,6 +178,9 @@ swapBtn.addEventListener("click", (e) => {
   inputLanguage.dataset.value = outputLanguage.dataset.value;
   outputLanguage.dataset.value = tempValue;
 
+  store_to_local("stored_src_lang", inputLanguage.dataset.value);
+  store_to_local("stored_des_lang", outputLanguage.dataset.value);
+
   //swap text
   const tempInputText = inputTextElem.value;
   inputTextElem.value = outputTextElem.value;

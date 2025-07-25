@@ -12,8 +12,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@azure-rest/ai-inference": "^1.0.0-beta.6",
+    "@azure/core-auth": "^1.10.0",
     "@vitalets/google-translate-api": "^9.2.1",
     "bing-translate-api": "^4.1.0",
+    "dotenv": "^17.2.1",
     "express": "^5.1.0"
   },
   "devDependencies": {

@@ -12,6 +12,7 @@ async function translateText(event) {
     }
 
     try {
+        console.log("using AI");
         const response = await fetch('/translate', {
             method: 'POST',
             headers: {
@@ -72,5 +73,6 @@ function change_input_output_ug() {
         outputTextElem.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
     }
 }
+
 
 

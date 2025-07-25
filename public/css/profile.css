@@ -57,3 +57,77 @@
   color: var(--primary-text-color);
 }
 
+
+
+
+/* Use AI Toggle Styling (smaller and distinct from dark mode) */
+.ai-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ai-toggle-track {
+  position: relative;
+  width: 42px; /* Smaller track width */
+  height: 20px; /* Smaller track height */
+  background-color: var(--light-text-color); /* #cdccd1 in light mode, #58575c in dark mode */
+  border-radius: 10px; /* Adjusted for smaller size */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+/* Thumb styling */
+.ai-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px; /* Smaller thumb */
+  height: 16px;
+  background-color: var(--light-bg-color); /* #fff in light mode, #444444 in dark mode */
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out, scale 0.2s ease;
+}
+
+/* Thumb movement and scale when toggled */
+.ai-toggle-track .toggle-checkbox:checked ~ .ai-toggle-thumb {
+  transform: translateX(20px); /* Adjusted for smaller track */
+  scale: 1.1; /* Slight scale-up effect when toggled */
+}
+
+/* Background color change for track when toggled */
+.ai-toggle-track:has(.toggle-checkbox:checked) {
+  background-color: var(--primary-color); /* #356aff */
+}
+
+/* Hover effect for interactivity */
+.ai-toggle-track:hover {
+  background-color: #aaa; /* Slightly darker gray on hover when off */
+}
+
+.ai-toggle-track:has(.toggle-checkbox:checked):hover {
+  background-color: #2f5de6; /* Slightly darker blue on hover when on */
+}
+
+/* Adjust spacing for switch_ai menu option */
+.switch_ai {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px; /* Reduced padding for compact look */
+}
+
+.switch-label {
+  margin-right: 8px; /* Reduced margin */
+  font-size: 0.9rem; /* Smaller font size for label */
+  color: var(--text-color); /* #111116 in light mode, #fff in dark mode */
+}
+
+
+
+
+
+

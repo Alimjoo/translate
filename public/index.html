@@ -27,23 +27,47 @@
       src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"
     ></script>
     <title>Piyazon Translator</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/profile.css" />
     <link rel="stylesheet" href="./css/load_font.css" />
   </head>
   <body>
     <div class="menu-container">
       <div class="menu-icon">
-        <img src="./favicon/favicon-96x96.png" alt="Piyazon Translator Logo" class="logo-icon" />
+        <img
+          src="./favicon/favicon-96x96.png"
+          alt="Piyazon Translator Logo"
+          class="logo-icon"
+        />
         <!-- <ion-icon name="menu-outline"></ion-icon> -->
       </div>
       <ul class="menu-dropdown">
         <li class="menu-option piyazon_name"></li>
         <li class="menu-option web_name"></li>
-        <hr>
+        <hr />
         <li class="menu-option disp_lang_zh" code="zh">汉语</li>
-        <li class="menu-option disp_lang_ug" code="ug" style="font-family: chiwer;">ئۇيغۇرچە</li>
+        <li
+          class="menu-option disp_lang_ug"
+          code="ug"
+          style="font-family: chiwer"
+        >
+          ئۇيغۇرچە
+        </li>
         <li class="menu-option disp_lang_en" code="en">English</li>
+        <hr />
+        <li class="menu-option switch_ai">
+          <span class="switch-label">Use AI</span>
+          <label class="toggle ai-toggle" for="ai-toggle-btn">
+            <div class="ai-toggle-track">
+              <input
+                type="checkbox"
+                class="toggle-checkbox"
+                id="ai-toggle-btn"
+              />
+              <span class="ai-toggle-thumb"></span>
+            </div>
+          </label>
+        </li>
       </ul>
     </div>
     <div class="mode">

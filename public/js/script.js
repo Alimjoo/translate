@@ -8,6 +8,8 @@ const swapBtn = document.querySelector(".swap-position"),
   inputTextElem = document.querySelector("#input-text"),
   outputTextElem = document.querySelector("#output-text");
 
+const aiToggle = document.getElementById('ai-toggle-btn');
+
 function populateDropdown(dropdown, options) {
   // console.log(options["src_lang"]);
   dropdown.querySelector("ul").innerHTML = "";
@@ -184,8 +186,11 @@ swapBtn.addEventListener("click", (e) => {
   translate();
 });
 
+
 async function translate() {
   const text = inputTextElem.value;
+  if (text === '') return;
+  outputTextElem.value = "Translating....";
   // console.log(text);
   const fromLang =
     inputLanguageDropdown.querySelector(".selected").dataset.value;
@@ -193,7 +198,16 @@ async function translate() {
     outputLanguageDropdown.querySelector(".selected").dataset.value;
 
   try {
-    const response = await fetch('/translate', {
+    var fetch_url;
+    if (aiToggle.checked) {
+      console.log("Using AI");
+      fetch_url = '/ai_translate';
+    } else {
+      console.log("Using Classic");
+      fetch_url = '/translate';
+    }
+    // const response = await fetch('/translate', {
+    const response = await fetch(fetch_url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -212,6 +226,15 @@ async function translate() {
     console.error(err);
   }
 }
+
+aiToggle.addEventListener('change', () => {
+  if (aiToggle.checked) {
+    store_to_local("use_ai", 'true');
+  } else {
+    store_to_local("use_ai", 'false');
+  }
+  translate();
+});
 
 // inputTextElem.addEventListener("input", async (e) => {
 //   //limit input to 5000 characters
@@ -306,8 +329,18 @@ function applyTheme() {
   }
 }
 
+function applyAi() {
+  const is_AI = localStorage.getItem("use_ai");
+  if (is_AI == 'true') {
+    aiToggle.checked = true; // Set checkbox to checked
+  } else {
+    aiToggle.checked = false; // Set checkbox to unchecked
+  }
+}
+
 // Apply theme when page loads
 document.addEventListener("DOMContentLoaded", applyTheme);
+document.addEventListener("DOMContentLoaded", applyAi);
 
 // Toggle theme on checkbox change
 darkModeCheckbox.addEventListener("change", () => {

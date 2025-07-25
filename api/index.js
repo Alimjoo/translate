@@ -43,12 +43,46 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { translate } from 'bing-translate-api';
 import { translate as Gtran } from '@vitalets/google-translate-api';
+import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
+import { AzureKeyCredential } from "@azure/core-auth";
+import dotenv from "dotenv";
+dotenv.config();
+
+const token = process.env["GITHUB_TOKEN"];
+const endpoint = "https://models.github.ai/inference";
+const model = "xai/grok-3";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 3000;
+
+const src_lang = {
+  "en": "English",
+  "ug": "Uyghur",
+  "zh-Hans": "Chinese Simplified",
+  "kk": "Kazakh",
+  "bo": "Tibetan",
+  "tgk": "Tajik",
+  "uz": "Uzbek",
+  "tr": "Turkish",
+  "es": "Spanish",
+  "ru": "Russian",
+  "hi": "Hindi",
+  "ur": "Urdu",
+  "ja": "Japanese",
+  "ko": "Korean",
+  "ar": "Arabic",
+  "zh-Hant": "Chinese Traditional",
+  "fr": "French",
+  "de": "German",
+  "it": "Italian",
+  "ky": "Kyrgyz",
+  "fa": "Persian",
+  "pt-PT": "Portuguese",
+  "th": "Thai",
+};
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -59,8 +93,8 @@ app.use(express.static(__dirname));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, '../public')));
 
-function fix_lang4g(lang_code){
-  if (lang_code == 'zh-Hans') return 'zh-CN'; 
+function fix_lang4g(lang_code) {
+  if (lang_code == 'zh-Hans') return 'zh-CN';
   else if (lang_code == 'zh-Hant') return 'zh-TW';
   else if (lang_code == 'pt-PT') return 'pt';
   else if (lang_code == 'tgk') return 'tg';
@@ -77,8 +111,46 @@ app.post('/translate', async (req, res) => {
 
     // const result = await translate(text, fromLang, toLang);
     // res.json({ translation: result.translation });
-    const googleText = await Gtran(text , {from:fix_lang4g(fromLang), to:fix_lang4g(toLang) });
+    const googleText = await Gtran(text, { from: fix_lang4g(fromLang), to: fix_lang4g(toLang) });
     res.json({ translation: googleText.text });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Translation failed' });
+  }
+});
+
+app.post('/ai_translate', async (req, res) => {
+  try {
+    // console.log(req.body);
+    const { text, fromLang, toLang } = req.body;
+    if (!text || !toLang || !fromLang) {
+      return res.status(400).json({ error: 'Text and target language are required' });
+    }
+
+    const client = ModelClient(
+      endpoint,
+      new AzureKeyCredential(token),
+    );
+
+    const response = await client.path("/chat/completions").post({
+      body: {
+        messages: [
+          { role: "system", content: "You are a translator, just output the translated result!" },
+          { role: "user", content: `Translate this '${text}' to ${src_lang[toLang]}` }
+        ],
+        temperature: 1,
+        top_p: 1,
+        model: model
+      }
+    });
+
+    if (isUnexpected(response)) {
+      res.status(500).json({ error: 'Translation failed' });
+      // throw response.body.error;
+    }
+    res.json({ translation: response.body.choices[0].message.content });
+    console.log(response.body.choices[0].message.content);
 
   } catch (err) {
     console.error(err);

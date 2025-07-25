@@ -49,7 +49,11 @@ document.addEventListener('click', (e) => {
 });
 
 function change_input_output_ug() {
-    if (inputLanguageDropdown.querySelector(".selected").dataset.value == 'ug') {
+    if (inputLanguageDropdown.querySelector(".selected").dataset.value == 'ug' ||
+        inputLanguageDropdown.querySelector(".selected").dataset.value == "ur" ||
+        inputLanguageDropdown.querySelector(".selected").dataset.value == "fa" ||
+        inputLanguageDropdown.querySelector(".selected").dataset.value == "ar"
+    ) {
         inputTextElem.style.direction = 'rtl';
         inputTextElem.style.fontFamily = 'chiwer';
     } else {

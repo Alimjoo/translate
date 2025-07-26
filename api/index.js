@@ -46,6 +46,7 @@ import { translate as Gtran } from '@vitalets/google-translate-api';
 import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
 import OpenAI from "openai";
+import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -188,6 +189,39 @@ app.post('/clarify_translate', async (req, res) => {
       ],
     });
     res.json({ translation: response.choices[0].message.content });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Translation failed' });
+  }
+});
+
+app.post('/gemini_translate', async (req, res) => {
+  const ai = new GoogleGenAI({});
+  try {
+    console.log(req.body);
+    const { text, fromLang, toLang } = req.body;
+    if (!text || !toLang || !fromLang) {
+      return res.status(400).json({ error: 'Text and target language are required' });
+    }
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: `Translate this '${text}'
+            from ${src_lang[fromLang]} to ${src_lang[toLang]}`,
+      config: {
+        systemInstruction: {
+          parts: [
+            { text: "You are a translator, just output the best translated result!" },
+            { text: "do not explain and just translate" }
+          ]
+        },
+        thinkingConfig: {
+          thinkingBudget: 0, // Disables thinking
+        },
+      }
+    });
+    res.json({ translation: response.text });
 
   } catch (err) {
     console.error(err);

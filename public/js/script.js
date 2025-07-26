@@ -205,7 +205,8 @@ async function translate() {
     if (aiToggle.checked) {
       console.log("Using AI");
       // fetch_url = '/ai_translate';
-      fetch_url = '/clarify_translate';
+      // fetch_url = '/clarify_translate';
+      fetch_url = '/gemini_translate';
     } else {
       console.log("Using Classic");
       fetch_url = '/translate';
@@ -272,7 +273,7 @@ inputTextElem.addEventListener("input", (e) => {
 // Debounced version of translate
 const debouncedTranslate = debounce(async () => {
   await translate();
-}, 300); // Adjust delay (300ms) as needed
+}, aiToggle.checked?500:300); // Adjust delay (300ms) as needed
 
 // const uploadDocument = document.querySelector("#upload-document"),
 //   uploadTitle = document.querySelector("#upload-title");

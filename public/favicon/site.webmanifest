@@ -2,7 +2,7 @@
   "name": "Piyazon Translator",
   "short_name": "PiTarjiman",
   "description": "A multilingual translation tool",
-  "start_url": "/",
+  "start_url": "/public/index.html",
   "icons": [
     {
       "src": "/public/favicon/web-app-manifest-192x192.png",

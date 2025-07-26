@@ -78,3 +78,6 @@ function change_input_output_ug() {
 document.getElementById('dismiss-warning').addEventListener('click', () => {
     document.getElementById('warning-text').style.display = 'none';
 });
+document.getElementById('warning-text').addEventListener('click', () => {
+    document.getElementById('warning-text').style.display = 'none';
+});

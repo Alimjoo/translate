@@ -55,6 +55,9 @@ const webName = document.querySelector('.web_name');
 const piyazonName = document.querySelector('.piyazon_name');
 const curInLang = inputLanguageDropdown.querySelector(".selected");
 const curOutLang = outputLanguageDropdown.querySelector(".selected");
+const warning_header = document.querySelector("#warning_header");
+const warning_content = document.querySelector("#warning_content");
+
 function Change_Display_Lang() {
   get_disp_lang();
   // console.log(`change to ${selected_display_lang['code']}`)
@@ -66,17 +69,17 @@ function Change_Display_Lang() {
   curOutLang.innerHTML = selected_display_lang["src_lang"][curOutLang.dataset.value];
   const input_options = document.querySelectorAll('#input-language .dropdown-menu .option');
   const output_options = document.querySelectorAll('#output-language .dropdown-menu .option');
-  if (selected_display_lang["code"] == "ug" ||
-    selected_display_lang["code"] == "ur" ||
-    selected_display_lang["code"] == "fa" ||
-    selected_display_lang["code"] == "ar"
-  ) {
+  warning_header.innerHTML = selected_display_lang["warning_header"];
+  warning_content.innerHTML = selected_display_lang["warning_content"];
+  if (selected_display_lang["code"] == "ug") {
     fromHeading.style.fontFamily = "chiwer";
     toHeading.style.fontFamily = "chiwer";
     webName.style.fontFamily = "chiwer";
     piyazonName.style.fontFamily = "chiwer";
     curInLang.style.fontFamily = "chiwer";
     curOutLang.style.fontFamily = "chiwer";
+    warning_header.style.fontFamily = "chiwer";
+    warning_content.style.fontFamily = "chiwer";
     input_options.forEach((option, index) => {
       option.innerHTML = selected_display_lang["src_lang"][option.dataset.value];
       option.style.fontFamily = "chiwer";
@@ -92,6 +95,8 @@ function Change_Display_Lang() {
     piyazonName.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
     curInLang.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
     curOutLang.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
+    warning_header.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
+    warning_content.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
     input_options.forEach((option, index) => {
       option.innerHTML = selected_display_lang["src_lang"][option.dataset.value];
       option.style.fontFamily = '"Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif';
@@ -273,7 +278,7 @@ inputTextElem.addEventListener("input", (e) => {
 // Debounced version of translate
 const debouncedTranslate = debounce(async () => {
   await translate();
-}, aiToggle.checked?500:300); // Adjust delay (300ms) as needed
+}, aiToggle.checked ? 500 : 300); // Adjust delay (300ms) as needed
 
 // const uploadDocument = document.querySelector("#upload-document"),
 //   uploadTitle = document.querySelector("#upload-title");

@@ -213,7 +213,7 @@ app.post('/gemini_translate', async (req, res) => {
         systemInstruction: {
           parts: [
             { text: "You are a translator, just output the best translated result!" },
-            { text: "do not explain and just translate" }
+            { text: "important!! do not explain and just translate as instructed and output the translated result only!" }
           ]
         },
         thinkingConfig: {

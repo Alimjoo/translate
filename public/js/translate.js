@@ -65,7 +65,7 @@ function change_input_output_ug() {
         outputLanguageDropdown.querySelector(".selected").dataset.value == "ur" ||
         outputLanguageDropdown.querySelector(".selected").dataset.value == "fa" ||
         outputLanguageDropdown.querySelector(".selected").dataset.value == "ar"
-) {
+    ) {
         outputTextElem.style.direction = 'rtl';
         outputTextElem.style.fontFamily = 'chiwer';
     } else {
@@ -75,4 +75,6 @@ function change_input_output_ug() {
 }
 
 
-
+document.getElementById('dismiss-warning').addEventListener('click', () => {
+    document.getElementById('warning-text').style.display = 'none';
+});

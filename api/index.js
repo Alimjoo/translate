@@ -45,12 +45,16 @@ import { translate } from 'bing-translate-api';
 import { translate as Gtran } from '@vitalets/google-translate-api';
 import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
+import OpenAI from "openai";
 import dotenv from "dotenv";
 dotenv.config();
 
 const token = process.env["GITHUB_TOKEN"];
 const endpoint = "https://models.github.ai/inference";
 const model = "xai/grok-3-mini";
+
+const clarify_token = process.env["CLARIFY_TOKEN"];
+const clarify_url = "https://api.clarifai.com/v2/ext/openai/v1";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -137,7 +141,10 @@ app.post('/ai_translate', async (req, res) => {
       body: {
         messages: [
           { role: "system", content: "You are a translator, just output the translated result!" },
-          { role: "user", content: `Translate this '${text}' to ${src_lang[toLang]}` }
+          {
+            role: "user", content: `Translate this '${text}'
+            from ${src_lang[fromLang]} to ${src_lang[toLang]}`
+          }
         ],
         temperature: 1,
         top_p: 1,
@@ -151,6 +158,36 @@ app.post('/ai_translate', async (req, res) => {
     }
     res.json({ translation: response.body.choices[0].message.content });
     console.log(response.body.choices[0].message.content);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Translation failed' });
+  }
+});
+
+app.post('/clarify_translate', async (req, res) => {
+  try {
+    console.log(req.body);
+    const { text, fromLang, toLang } = req.body;
+    if (!text || !toLang || !fromLang) {
+      return res.status(400).json({ error: 'Text and target language are required' });
+    }
+    const client = new OpenAI({
+      baseURL: clarify_url,
+      apiKey: clarify_token,
+    });
+
+    const response = await client.chat.completions.create({
+      model: "https://clarifai.com/xai/chat-completion/models/grok-3",
+      messages: [
+        { role: "system", content: "You are a translator, just output the translated result!" },
+        {
+          role: "user", content: `Translate this '${text}'
+            from ${src_lang[fromLang]} to ${src_lang[toLang]}`
+        }
+      ],
+    });
+    res.json({ translation: response.choices[0].message.content });
 
   } catch (err) {
     console.error(err);

@@ -204,7 +204,8 @@ async function translate() {
     var fetch_url;
     if (aiToggle.checked) {
       console.log("Using AI");
-      fetch_url = '/ai_translate';
+      // fetch_url = '/ai_translate';
+      fetch_url = '/clarify_translate';
     } else {
       console.log("Using Classic");
       fetch_url = '/translate';

@@ -50,7 +50,7 @@ dotenv.config();
 
 const token = process.env["GITHUB_TOKEN"];
 const endpoint = "https://models.github.ai/inference";
-const model = "xai/grok-3";
+const model = "xai/grok-3-mini";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

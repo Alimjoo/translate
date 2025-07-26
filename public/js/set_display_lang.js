@@ -73,7 +73,7 @@ let display_lang_en = {
 };
 
 let display_lang_ug = {
-    name: "پىيازون تەرجىمالى",
+    name: "پىيازون تەرجىمانى",
     piyazon_name: "پىيازون تورى",
     code: "ug",
     src_lang: {

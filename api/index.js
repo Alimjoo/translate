@@ -214,8 +214,8 @@ app.post('/gemini_translate', async (req, res) => {
           parts: [
             { text: "You are a translator, just output the best translated result!" },
             { text: "important!! do not explain and just translate as instructed and output the translated result only!" },
-            { text: `If the from language does not match provided language, translate the detected language to target language,
-              does not warn anything!, just give the result` }
+            { text: `If the detected language does not match provided language, translate the detected language to target language,
+              and do not warn anything!, just give the result` }
           ]
         },
         thinkingConfig: {

@@ -220,7 +220,7 @@ async function translate() {
     });
     const data = await response.json();
     if (data.error) {
-      outputTextElem.value = ``;
+      outputTextElem.value = `⚠️`;
       console.log(`Error ${data.error}`);
     } else {
       outputTextElem.value = `${data.translation}`;

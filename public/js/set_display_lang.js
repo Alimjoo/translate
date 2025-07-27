@@ -2,6 +2,7 @@ let display_lang_zh = {
     name: "Piyazon 翻译",
     piyazon_name: "Piyazon 官网",
     code: "zh",
+    code_html: "zh-Hans",
     src_lang: {
         "en": "英语",
         "ug": "维吾尔语",
@@ -40,6 +41,7 @@ let display_lang_en = {
     name: "Piyazon Translator",
     piyazon_name: "Piyazon Official",
     code: "en",
+    code_html: "en",
     src_lang: {
         "en": "English",
         "ug": "Uyghur",
@@ -78,6 +80,7 @@ let display_lang_ug = {
     name: "پىيازون تەرجىمانى",
     piyazon_name: "پىيازون تورى",
     code: "ug",
+    code_html: "ug",
     src_lang: {
         "en": "ئىنگلىزچە", // English
         "ug": "ئۇيغۇرچە", // Uyghur

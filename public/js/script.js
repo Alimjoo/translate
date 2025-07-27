@@ -71,6 +71,10 @@ function Change_Display_Lang() {
   const output_options = document.querySelectorAll('#output-language .dropdown-menu .option');
   warning_header.innerHTML = selected_display_lang["warning_header"];
   warning_content.innerHTML = selected_display_lang["warning_content"];
+  // Update HTML lang attribute
+  document.documentElement.lang = selected_display_lang['code_html'];
+  // Update document title
+  document.title = selected_display_lang['name'];
   const existingMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
   const existingLink = document.querySelector('link[rel="manifest"]');
   if (existingMeta) {

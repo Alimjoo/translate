@@ -71,7 +71,7 @@ let display_lang_en = {
     output_place_holder: "Translated text will appear here",
     warning_header: "Warning: ",
     warning_content: "Translations may not always be accurate. Please verify critical information before use.",
-    manifest: "./favicon/site_zh.webmanifest"
+    manifest: "./favicon/site_en.webmanifest"
 };
 
 let display_lang_ug = {

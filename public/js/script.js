@@ -71,6 +71,24 @@ function Change_Display_Lang() {
   const output_options = document.querySelectorAll('#output-language .dropdown-menu .option');
   warning_header.innerHTML = selected_display_lang["warning_header"];
   warning_content.innerHTML = selected_display_lang["warning_content"];
+  const existingMeta = document.querySelector('meta[name="apple-mobile-web-app-title"]');
+  const existingLink = document.querySelector('link[rel="manifest"]');
+  if (existingMeta) {
+    existingMeta.remove();
+  }
+  // Create and append new meta tag
+  const meta = document.createElement('meta');
+  meta.name = 'apple-mobile-web-app-title';
+  meta.content = selected_display_lang['name']; // Updated content
+  document.head.appendChild(meta);
+  if (existingLink) {
+    existingLink.remove();
+  }
+  // Create and append new link tag for manifest
+  const link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = selected_display_lang['manifest']; // Updated manifest path
+  document.head.appendChild(link);
   if (selected_display_lang["code"] == "ug") {
     fromHeading.style.fontFamily = "chiwer";
     toHeading.style.fontFamily = "chiwer";

@@ -32,7 +32,8 @@ let display_lang_zh = {
     input_place_holder: "输入文本",
     output_place_holder: "发翻译会出现在这里",
     warning_header: "警告: ",
-    warning_content: "翻译可能并非总是准确。请在使用前验证关键信息。"
+    warning_content: "翻译可能并非总是准确。请在使用前验证关键信息。",
+    manifest: "./favicon/site_zh.webmanifest"
 };
 
 let display_lang_en = {
@@ -69,7 +70,8 @@ let display_lang_en = {
     input_place_holder: "Enter your text here",
     output_place_holder: "Translated text will appear here",
     warning_header: "Warning: ",
-    warning_content: "Translations may not always be accurate. Please verify critical information before use."
+    warning_content: "Translations may not always be accurate. Please verify critical information before use.",
+    manifest: "./favicon/site_zh.webmanifest"
 };
 
 let display_lang_ug = {
@@ -106,7 +108,8 @@ let display_lang_ug = {
     input_place_holder: "تىكىستنى كىرگۈزۈڭ",
     output_place_holder: "تەرجىمىسى بۇيەدە چىقىدۇ",
     warning_header: "ئاگاھلاندۇرۇش: ",
-    warning_content: "تەرجىمىلەر ھەمىشە توغرا بولماسلىقى مۇمكىن. ئىشلىتىشتىن ئىلگىرى مۇھىم ئۇچۇرلارنى دەلىللەڭ."
+    warning_content: "تەرجىمىلەر ھەمىشە توغرا بولماسلىقى مۇمكىن. ئىشلىتىشتىن ئىلگىرى مۇھىم ئۇچۇرلارنى دەلىللەڭ.",
+    manifest: "./favicon/site_ug.webmanifest"
 };
 
 
